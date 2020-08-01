@@ -23,6 +23,7 @@ class LoginUseCase(BaseUseCase):
         self._check_if_passwords_are_equal(hashed_password=registered_user.password)
 
         self.access_token = JwtHelper.encode_token(
+            user_id=str(registered_user.id),
             user_email=self.email,
             user_name=registered_user.name
         )

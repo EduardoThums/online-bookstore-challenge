@@ -6,10 +6,11 @@ _SECRET_KEY = '3ptKHs8qdsrPkih2i0aQZelY06rIKe3swDgXIFz2EGIXCnusSceiVB9pcVSARQ2lH
 class JwtHelper:
 
     @staticmethod
-    def encode_token(user_email: str, user_name: str) -> str:
+    def encode_token(user_id: str, user_email: str, user_name: str) -> str:
         payload = {
+            'user_id': user_id,
             'user_email': user_email,
-            user_name: user_name
+            'user_name': user_name
         }
 
         token = encode(
