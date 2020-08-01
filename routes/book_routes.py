@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify
 from domain.book.entities.book_entity import Book
 from helpers.serializer.serializer_helper import SerializerHelper
 
-book_middleware = Blueprint('book_routes', __name__)
+book_middleware = Blueprint('book_middleware', __name__)
 
 
 @book_middleware.route('/books', methods=['GET'])
