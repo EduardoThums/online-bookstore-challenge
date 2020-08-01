@@ -1,6 +1,6 @@
 from enum import Enum
 
-from mongoengine import StringField, FloatField, LazyReferenceField
+from mongoengine import StringField, LazyReferenceField
 
 from domain.base.entities.base_entity import BaseEntity
 from domain.user.entities.user_entity import User
@@ -23,8 +23,6 @@ class Book(BaseEntity):
 
     author = StringField(min_length=2, max_length=50)
 
-    cost = FloatField(required=True)
-
     user = LazyReferenceField(User, required=True)
 
     status = StringField(required=True, default=BookStatus.AVAILABLE.value)
@@ -35,7 +33,6 @@ class Book(BaseEntity):
             'title': self.title,
             'description': self.description,
             'author': self.author,
-            'cost': self.cost,
             'user': self.user,
             'status': self.status
         }

@@ -6,11 +6,10 @@ from domain.book.entities.book_entity import Book
 
 class RegisterBookUseCase(BaseUseCase):
 
-    def __init__(self, title: str, description: str, author: str, cost: float):
+    def __init__(self, title: str, description: str, author: str):
         self.title = title
         self.description = description
         self.author = author
-        self.cost = cost
 
         self.registered_book = None
 
@@ -21,7 +20,6 @@ class RegisterBookUseCase(BaseUseCase):
             title=self.title,
             description=self.description,
             author=self.author,
-            cost=self.cost,
             user=logged_user
         )
         new_book.save()

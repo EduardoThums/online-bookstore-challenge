@@ -37,13 +37,11 @@ def register_book():
     title = request_json['title']
     description = request_json.get('description')
     author = request_json.get('author')
-    cost = request_json['cost']
 
     use_case = RegisterBookUseCase(
         title=title,
         description=description,
-        author=author,
-        cost=cost
+        author=author
     )
     use_case.exec()
 

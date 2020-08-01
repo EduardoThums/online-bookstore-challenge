@@ -43,8 +43,7 @@ class ListBorrowedBooksUseCase(BaseUseCase):
             )
 
             use_case = EstimateBorrowingFineUseCase(
-                borrow_date=book_borrowing.created_at,
-                book_cost=book.cost
+                borrow_date=book_borrowing.created_at
             )
             use_case.exec()
 

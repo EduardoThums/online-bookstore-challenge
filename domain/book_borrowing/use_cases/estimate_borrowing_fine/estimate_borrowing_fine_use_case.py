@@ -3,20 +3,19 @@ from datetime import datetime
 from domain.base.use_cases.base_use_case import BaseUseCase
 from helpers.date.date_helper import DateHelper
 
-_FINE_UNTIL_THREE_DAYS = 0.03
-_FINE_ABOVE_THREE_DAYS = 0.05
-_FINE_ABOVE_FIVE_DAYS = 0.07
+_FINE_UNTIL_THREE_DAYS = 3
+_FINE_ABOVE_THREE_DAYS = 5
+_FINE_ABOVE_FIVE_DAYS = 7
 
-_INTEREST_PER_DAY_UNTIL_THREE_DAYS = 0.002
-_INTEREST_PER_DAY_ABOVE_THREE_DAYS = 0.004
-_INTEREST_PER_DAY_ABOVE_FIVE_DAYS = 0.006
+_INTEREST_PER_DAY_UNTIL_THREE_DAYS = 0.2
+_INTEREST_PER_DAY_ABOVE_THREE_DAYS = 0.4
+_INTEREST_PER_DAY_ABOVE_FIVE_DAYS = 0.6
 
 
 class EstimateBorrowingFineUseCase(BaseUseCase):
 
-    def __init__(self, borrow_date: datetime, book_cost: float):
+    def __init__(self, borrow_date: datetime):
         self.borrow_date = borrow_date
-        self.book_cost = book_cost
 
         self.total_fine = 0
 
@@ -32,14 +31,34 @@ class EstimateBorrowingFineUseCase(BaseUseCase):
 
         if difference_in_days <= 3:
             fine_percent = _FINE_UNTIL_THREE_DAYS
-            interest_per_day = difference_in_days * _INTEREST_PER_DAY_UNTIL_THREE_DAYS
+            interest_per_day = self._calculate_interests_until_third_day(difference_in_days)
 
         elif 3 < difference_in_days <= 5:
+            difference_in_days -= 3
+
+            interest_per_day = self._calculate_interests_until_third_day(difference_in_days=3)
+            interest_per_day += self._calculate_interests_above_third_day(difference_in_days)
+
             fine_percent = _FINE_ABOVE_THREE_DAYS
-            interest_per_day = difference_in_days * _INTEREST_PER_DAY_ABOVE_THREE_DAYS
-
         else:
-            fine_percent = _FINE_ABOVE_FIVE_DAYS
-            interest_per_day = difference_in_days * _INTEREST_PER_DAY_ABOVE_FIVE_DAYS
+            difference_in_days -= 5
 
-        self.total_fine = (self.book_cost * fine_percent) * interest_per_day
+            interest_per_day = self._calculate_interests_until_third_day(difference_in_days=3)
+            interest_per_day += self._calculate_interests_above_third_day(difference_in_days=2)
+            interest_per_day += self._calculate_interests_above_fifth_day(difference_in_days)
+
+            fine_percent = _FINE_ABOVE_FIVE_DAYS
+
+        self.total_fine = fine_percent + interest_per_day
+
+    @staticmethod
+    def _calculate_interests_until_third_day(difference_in_days: int) -> float:
+        return difference_in_days * _INTEREST_PER_DAY_UNTIL_THREE_DAYS
+
+    @staticmethod
+    def _calculate_interests_above_third_day(difference_in_days: int) -> float:
+        return difference_in_days * _INTEREST_PER_DAY_ABOVE_THREE_DAYS
+
+    @staticmethod
+    def _calculate_interests_above_fifth_day(difference_in_days: int) -> float:
+        return difference_in_days * _INTEREST_PER_DAY_ABOVE_FIVE_DAYS

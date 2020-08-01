@@ -33,8 +33,7 @@ class ReturnBookUseCase(BaseUseCase):
             raise BusinessError(code=BusinessError.BOOK_BORROWING_NOT_FOUND)
 
         use_case = EstimateBorrowingFineUseCase(
-            borrow_date=book_borrowing.created_at,
-            book_cost=book.cost
+            borrow_date=book_borrowing.created_at
         )
         use_case.exec()
 
