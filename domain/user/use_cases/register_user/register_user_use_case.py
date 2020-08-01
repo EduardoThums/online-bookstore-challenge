@@ -2,6 +2,7 @@ import re
 
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.user.entities.user_entity import User
+from helpers.crypto.crypto_helper import CryptoHelper
 
 _VALID_EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 _CONTAINS_NUMBER_REGEX = r"\d"
@@ -22,10 +23,12 @@ class RegisterUserUseCase(BaseUseCase):
 
         self._check_if_email_is_already_registered()
 
+        hashed_password = CryptoHelper.hash_password(self.password)
+
         new_user = User(
             email=self.email,
             name=self.name,
-            password=self.password
+            password=hashed_password
         )
 
         new_user.save()
