@@ -6,7 +6,7 @@ from domain.book_borrowing.entities.book_borrowing_entity import BookBorrowing
 from domain.book_borrowing.entities.book_borrowing_entity import BookBorrowingBookStatus
 from domain.book_borrowing.use_cases.estimate_borrowing_fine.estimate_borrowing_fine_use_case import \
     EstimateBorrowingFineUseCase
-from erros.business_error import BusinessError
+from errors.business_error import BusinessError
 from helpers.database.database_helper import DatabaseHelper
 
 

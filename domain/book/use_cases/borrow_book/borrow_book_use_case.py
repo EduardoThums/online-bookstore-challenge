@@ -4,7 +4,7 @@ from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.book.entities.book_entity import Book, BookStatus
 from domain.book_borrowing.entities.book_borrowing_entity import BookBorrowing
 from domain.user.entities.user_entity import User
-from erros.business_error import BusinessError
+from errors.business_error import BusinessError
 from helpers.database.database_helper import DatabaseHelper
 
 

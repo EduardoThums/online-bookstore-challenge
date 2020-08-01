@@ -1,7 +1,7 @@
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.user.entities.user_entity import User
-from erros.authentication_error import AuthenticationError
-from erros.business_error import BusinessError
+from errors.authentication_error import AuthenticationError
+from errors.business_error import BusinessError
 from helpers.crypto.crypto_helper import CryptoHelper
 from helpers.jwt.jwt_helper import JwtHelper
 

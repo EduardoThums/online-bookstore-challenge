@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock
 from domain.book.entities.book_entity import Book, BookStatus
 from domain.book_borrowing.entities.book_borrowing_entity import BookBorrowing, BookBorrowingBookStatus
 from domain.book_borrowing.use_cases.return_book.return_book_use_case import ReturnBookUseCase
-from erros.business_error import BusinessError
+from errors.business_error import BusinessError
 from helpers.date.date_helper import DateHelper
 
 module_path = ReturnBookUseCase.__module__

@@ -3,7 +3,7 @@ import functools
 from flask import request
 
 from domain.user.entities.user_entity import User
-from erros.authentication_error import AuthenticationError
+from errors.authentication_error import AuthenticationError
 from helpers.database.database_helper import DatabaseHelper
 from helpers.jwt.jwt_helper import JwtHelper
 

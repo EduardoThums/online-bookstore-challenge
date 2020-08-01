@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 
-from erros.authentication_error import AuthenticationError
-from erros.business_error import BusinessError
+from errors.authentication_error import AuthenticationError
+from errors.business_error import BusinessError
 from helpers.database.database_helper import DatabaseHelper
 from helpers.serializer.serializer_helper import SerializerHelper
 from routes import auth_middleware, book_middleware, user_middleware

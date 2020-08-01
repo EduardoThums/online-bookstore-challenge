@@ -2,7 +2,7 @@ import re
 
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.user.entities.user_entity import User
-from erros.business_error import BusinessError
+from errors.business_error import BusinessError
 from helpers.crypto.crypto_helper import CryptoHelper
 
 _VALID_EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
