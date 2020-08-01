@@ -13,6 +13,9 @@ def require_logged_user(func):
         access_token = request.headers['Authorization']
         token_payload = JwtHelper.decode_token(access_token)
 
+        if not token_payload:
+            raise Exception("Not authorized resource")
+
         user_email = token_payload['user_email']
 
         registered_user = User.objects(email=user_email)

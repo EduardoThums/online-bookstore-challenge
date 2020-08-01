@@ -1,3 +1,5 @@
+from typing import Optional
+
 from jwt import encode, decode
 
 _SECRET_KEY = '3ptKHs8qdsrPkih2i0aQZelY06rIKe3swDgXIFz2EGIXCnusSceiVB9pcVSARQ2lHCMkksVkF8faa7MQWnmqhcpd56NxVDxQhgVGdTGP8ZpDAYnFY1ANkTJqqvqsHs'
@@ -22,11 +24,15 @@ class JwtHelper:
         return token.decode('utf-8')
 
     @staticmethod
-    def decode_token(token: str) -> dict:
-        token = decode(
-            algorithms=['HS256'],
-            key=_SECRET_KEY,
-            jwt=token
-        )
+    def decode_token(token: str) -> Optional[dict]:
+        try:
+            token = decode(
+                algorithms=['HS256'],
+                key=_SECRET_KEY,
+                jwt=token
+            )
 
-        return token
+            return token
+
+        except Exception:
+            return None
