@@ -210,3 +210,5 @@ dmypy.json
 cython_debug/
 
 .idea/
+
+playground.py

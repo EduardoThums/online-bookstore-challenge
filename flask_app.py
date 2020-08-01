@@ -1,13 +1,13 @@
 from flask import Flask
 
 from helpers.database.database_helper import DatabaseHelper
-from routes.book_routes import book_middleware
-from routes.user_routes import user_middleware
+from routes import auth_middleware, book_middleware, user_middleware
 
 app = Flask(__name__)
 
 app.register_blueprint(book_middleware)
 app.register_blueprint(user_middleware)
+app.register_blueprint(auth_middleware)
 
 
 @app.before_first_request
