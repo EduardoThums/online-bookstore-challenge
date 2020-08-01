@@ -79,7 +79,7 @@ class TestReturnBookUseCase(TestCase):
 
         with patch.object(Book, 'first', return_value=book), \
                 patch(f'{module_path}.request'), \
-                patch.object(BookBorrowing, 'first_aggregation', return_value=None):
+                patch.object(BookBorrowing, 'first', return_value=None):
             try:
                 ReturnBookUseCase(
                     book_id='5f25eac0159cb9dfa8a2e8d2'
