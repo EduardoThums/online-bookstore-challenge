@@ -3,6 +3,7 @@ import functools
 from flask import request
 
 from domain.user.entities.user_entity import User
+from erros.authentication_error import AuthenticationError
 from helpers.database.database_helper import DatabaseHelper
 from helpers.jwt.jwt_helper import JwtHelper
 
@@ -23,7 +24,7 @@ def require_logged_user(func):
         token_payload = JwtHelper.decode_token(access_token)
 
         if not token_payload:
-            raise Exception("Not authorized resource")
+            raise AuthenticationError(code=AuthenticationError.INVALID_CREDENTIALS)
 
         user_email = token_payload['user_email']
 
@@ -34,6 +35,6 @@ def require_logged_user(func):
 
             return func(*args, **kwargs)
         else:
-            raise Exception("Not authorized resource")
+            raise AuthenticationError(code=AuthenticationError.INVALID_CREDENTIALS)
 
     return func_wrapper

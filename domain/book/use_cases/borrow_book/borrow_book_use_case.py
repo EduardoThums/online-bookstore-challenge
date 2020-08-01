@@ -4,6 +4,7 @@ from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.book.entities.book_entity import Book, BookStatus
 from domain.book_borrowing.entities.book_borrowing_entity import BookBorrowing
 from domain.user.entities.user_entity import User
+from erros.business_error import BusinessError
 from helpers.database.database_helper import DatabaseHelper
 
 
@@ -16,13 +17,13 @@ class BorrowBookUseCase(BaseUseCase):
         book_to_be_borrowed = Book.first(id=self.book_id)
 
         if not book_to_be_borrowed:
-            raise Exception("Book does not exist")
+            raise BusinessError(code=BusinessError.BOOK_NOT_FOUND)
 
         if book_to_be_borrowed.user.id == request.logged_user.user_id:
-            raise Exception("Can't borrow own book")
+            raise BusinessError(code=BusinessError.NOT_ALLOWED_TO_BORROW_OWN_BOOK)
 
         if book_to_be_borrowed.status == BookStatus.BORROWED.value:
-            raise Exception("Can't borrow an already borrowed book")
+            raise BusinessError(code=BusinessError.BOOK_CANT_BE_BORROWED)
 
         user = User.first(id=request.logged_user.user_id)
 

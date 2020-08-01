@@ -2,6 +2,7 @@ import re
 
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.user.entities.user_entity import User
+from erros.business_error import BusinessError
 from helpers.crypto.crypto_helper import CryptoHelper
 
 _VALID_EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
@@ -35,7 +36,7 @@ class RegisterUserUseCase(BaseUseCase):
 
     def _check_if_email_is_valid(self):
         if not re.fullmatch(_VALID_EMAIL_REGEX, self.email):
-            raise Exception('Invalid email format')
+            raise BusinessError(code=BusinessError.INVALID_EMAIL_FORMAT)
 
     def _check_if_password_is_valid(self):
         has_at_least_eight_characters = len(self.password) >= 8
@@ -45,10 +46,10 @@ class RegisterUserUseCase(BaseUseCase):
         if not has_at_least_eight_characters or \
                 not has_at_least_one_number or \
                 not has_at_least_one_upper_and_lower_case:
-            raise Exception('Invalid password format')
+            raise BusinessError(code=BusinessError.INVALID_PASSWORD_FORMAT)
 
     def _check_if_email_is_already_registered(self):
         registered_user = User.objects(email=self.email)
 
         if registered_user:
-            raise Exception('User already registered')
+            raise BusinessError(code=BusinessError.USER_ALREADY_REGISTERED)

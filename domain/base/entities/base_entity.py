@@ -1,3 +1,5 @@
+from typing import List
+
 from mongoengine import Document, DateTimeField
 
 from helpers.database.database_helper import DatabaseHelper
@@ -31,6 +33,16 @@ class BaseEntity(Document, Serializable):
             first_document = cls.objects.get(**filters)
 
             return first_document
+
+        except Exception:
+            return None
+
+    @classmethod
+    def first_aggregation(cls, pipeline: List[dict]):
+        try:
+            aggregation_result = cls.objects.aggregate(pipeline)
+
+            return next(aggregation_result)
 
         except Exception:
             return None

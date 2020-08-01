@@ -1,5 +1,7 @@
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.user.entities.user_entity import User
+from erros.authentication_error import AuthenticationError
+from erros.business_error import BusinessError
 from helpers.crypto.crypto_helper import CryptoHelper
 from helpers.jwt.jwt_helper import JwtHelper
 
@@ -13,12 +15,10 @@ class LoginUseCase(BaseUseCase):
         self.access_token = None
 
     def exec(self):
-        registered_user = User.objects(email=self.email)
+        registered_user = User.first(email=self.email)
 
         if not registered_user:
-            raise Exception('User does not exist')
-
-        registered_user = registered_user[0]
+            raise BusinessError(code=BusinessError.USER_NOT_FOUND)
 
         self._check_if_passwords_are_equal(hashed_password=registered_user.password)
 
@@ -35,4 +35,4 @@ class LoginUseCase(BaseUseCase):
         )
 
         if not are_the_passwords_equal:
-            raise Exception("Invalid credentials")
+            raise AuthenticationError(code=AuthenticationError.INVALID_CREDENTIALS)
