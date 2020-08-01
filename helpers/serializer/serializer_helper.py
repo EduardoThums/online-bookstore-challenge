@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
 
-from bson import ObjectId
+from bson import ObjectId, DBRef
 from mongoengine import QuerySet
 
 from helpers.date.date_helper import DateHelper
@@ -34,6 +34,9 @@ class SerializerHelper:
 
         if isinstance(data, ObjectId):
             return SerializerHelper.serialize_object_id(data)
+
+        if isinstance(data, DBRef):
+            return SerializerHelper.serialize_db_ref(data)
 
         if isinstance(data, Enum):
             return SerializerHelper.serialize_enum(data)
@@ -68,6 +71,10 @@ class SerializerHelper:
     @staticmethod
     def serialize_object_id(data: ObjectId):
         return str(data)
+
+    @staticmethod
+    def serialize_db_ref(data: DBRef):
+        return SerializerHelper.serialize_object_id(data.id)
 
     @staticmethod
     def serialize_enum(data: Enum):

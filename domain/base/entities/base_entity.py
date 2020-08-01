@@ -1,5 +1,6 @@
 from mongoengine import Document, DateTimeField
 
+from helpers.database.database_helper import DatabaseHelper
 from helpers.date.date_helper import DateHelper
 from helpers.serializer.serializer_helper import Serializable
 
@@ -20,3 +21,16 @@ class BaseEntity(Document, Serializable):
             'created_at': self.created_at,
             'last_updated_at': self.last_updated_at
         }
+
+    @classmethod
+    def first(cls, **filters):
+        if 'id' in filters:
+            filters['id'] = DatabaseHelper.convert_to_object_id(filters['id'])
+
+        try:
+            first_document = cls.objects.get(**filters)
+
+            return first_document
+
+        except Exception:
+            return None

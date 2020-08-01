@@ -1,4 +1,4 @@
-from mongoengine import ReferenceField
+from mongoengine import LazyReferenceField
 
 from domain.base.entities.base_entity import BaseEntity
 from domain.book.entities.book_entity import Book
@@ -11,6 +11,6 @@ class BookBorrowing(BaseEntity):
         'collection': 'book_borrowing'
     }
 
-    book = ReferenceField(Book, required=True)
+    book = LazyReferenceField(Book, required=True)
 
-    user = ReferenceField(User, required=True)
+    user = LazyReferenceField(User, required=True)
