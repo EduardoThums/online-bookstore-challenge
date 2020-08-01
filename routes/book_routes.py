@@ -8,10 +8,6 @@ book_middleware = Blueprint('book_routes', __name__)
 
 @book_middleware.route('/books', methods=['GET'])
 def list_all_books():
-    book = Book(
-        title='asdasdasd',
-        cost=100
-    )
-    book.save()
+    books = SerializerHelper.serialize(Book.objects)
 
-    return jsonify(SerializerHelper.serialize(Book.objects)), 200
+    return jsonify({'books': books}), 200

@@ -17,16 +17,38 @@ class Serializable:
 
 
 class SerializerHelper:
+
     @staticmethod
-    def serialize_dict_key(value):
-        return SerializerHelper.serialize(value)
+    def serialize(data):
+        if isinstance(data, Serializable):
+            return SerializerHelper.serialize_serializable(data)
+
+        if isinstance(data, dict):
+            return SerializerHelper.serialize_dict(data)
+
+        if isinstance(data, list):
+            return SerializerHelper.serialize_list(data)
+
+        if isinstance(data, datetime):
+            return SerializerHelper.serialize_datetime(data)
+
+        if isinstance(data, ObjectId):
+            return SerializerHelper.serialize_object_id(data)
+
+        if isinstance(data, Enum):
+            return SerializerHelper.serialize_enum(data)
+
+        if isinstance(data, QuerySet):
+            return SerializerHelper.serialize_list(list(data))
+
+        return data
 
     @staticmethod
     def serialize_dict(data: dict):
         result = {}
 
         for key, value in data.items():
-            result[key] = SerializerHelper.serialize_dict_key(value)
+            result[key] = SerializerHelper.serialize(value)
 
         return result
 
@@ -56,28 +78,3 @@ class SerializerHelper:
         return SerializerHelper.serialize(
             data.__serialize__()
         )
-
-    @staticmethod
-    def serialize(data, ignore_serializable=False):
-        if not ignore_serializable and isinstance(data, Serializable):
-            return SerializerHelper.serialize_serializable(data)
-
-        if isinstance(data, dict):
-            return SerializerHelper.serialize_dict(data)
-
-        if isinstance(data, list):
-            return SerializerHelper.serialize_list(data)
-
-        if isinstance(data, datetime):
-            return SerializerHelper.serialize_datetime(data)
-
-        if isinstance(data, ObjectId):
-            return SerializerHelper.serialize_object_id(data)
-
-        if isinstance(data, Enum):
-            return SerializerHelper.serialize_enum(data)
-
-        if isinstance(data, QuerySet):
-            return SerializerHelper.serialize_list(list(data))
-
-        return data
