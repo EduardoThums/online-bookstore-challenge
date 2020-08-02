@@ -2,7 +2,7 @@
 
 RESTful API developed as a solution for the [challenge](https://github.com/bravosul/back-end-challenge) proposed by [Bravosul](https://bravosul.com.br/) company.
 
-## Tecnologias
+## Technologies
 - Python
 - Flask
 - MongoDB
