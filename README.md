@@ -1,6 +1,6 @@
 # Online Bookstore Challenge
 
-API RESTful criada como solução para o [desafio](https://github.com/bravosul/back-end-challenge) proposto para a empresa [Bravosul](https://bravosul.com.br/).
+API RESTful criada como solução para o [desafio](https://github.com/bravosul/back-end-challenge) proposto pela empresa [Bravosul](https://bravosul.com.br/).
 
 ## Tecnologias
 - Python
