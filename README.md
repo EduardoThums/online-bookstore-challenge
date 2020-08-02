@@ -38,5 +38,5 @@ make run-api
 ```
 ---
 
-# Documentação
+## Documentação
 Um exemplo com todas as rotas está disponivel no formato json para o [Insomnia](https://insomnia.rest/) no diretório ```resources/```.
