@@ -1,6 +1,6 @@
 # Online Bookstore Challenge
 
-API RESTful criada como solução para o [desafio](https://github.com/bravosul/back-end-challenge) proposto pela empresa [Bravosul](https://bravosul.com.br/).
+RESTful API developed as a solution for the [challenge](https://github.com/bravosul/back-end-challenge) proposed by [Bravosul](https://bravosul.com.br/) company.
 
 ## Tecnologias
 - Python
@@ -9,31 +9,31 @@ API RESTful criada como solução para o [desafio](https://github.com/bravosul/b
 - Docker
 
 
-## Requisitos
+## Requirements
 - [Python](https://www.python.org/)
 - [PIP (Python package manager)](https://pypi.org/project/pip/)
 - [Virtualenv](https://packaging.python.org/key_projects/#virtualenv)
 - [Docker](https://docs.docker.com/desktop/) e [Docker Compose](https://docs.docker.com/compose/install/)
 
 
-## Como usar
-1. Na raiz do projeto crie um arquivo chamado ```.env``` e adicione as variavies abaixo:
+## How to use
+1. Create a file named ```.env``` in the root project directory and add these variables on it:
 ```
 MONGODB_HOST=localhost
 SECRET_KEY=YOUR-SECRET-KEY
 ```
-2. Crie um ambiente virtual e instale as depencias do projeto:
 
+2. Create a virtual environment and install the project dependencies:
 ```
 python -m venv venv
 source /venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Na raiz do projeto rode o comando abaixo para iniciar a API e o banco de dados localmente:
+3. In the root project directory run the underneath command to start the API and database locally:
 ```
 make run-api
 ```
 
-## Documentação
-Um exemplo com todas as rotas está disponivel no formato json para o [Insomnia](https://insomnia.rest/) no diretório ```resources/```.
+## Documentation
+An example of all available routes is located in the ```resources/``` directory as an Insomnia JSON file.
