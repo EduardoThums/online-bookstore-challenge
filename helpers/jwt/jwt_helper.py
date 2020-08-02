@@ -2,7 +2,7 @@ from typing import Optional
 
 from jwt import encode, decode
 
-_SECRET_KEY = '3ptKHs8qdsrPkih2i0aQZelY06rIKe3swDgXIFz2EGIXCnusSceiVB9pcVSARQ2lHCMkksVkF8faa7MQWnmqhcpd56NxVDxQhgVGdTGP8ZpDAYnFY1ANkTJqqvqsHs'
+from helpers import ConfigHelper
 
 
 class JwtHelper:
@@ -17,7 +17,7 @@ class JwtHelper:
 
         token = encode(
             algorithm='HS256',
-            key=_SECRET_KEY,
+            key=ConfigHelper.SECRET_KEY,
             payload=payload
         )
 
@@ -28,7 +28,7 @@ class JwtHelper:
         try:
             token = decode(
                 algorithms=['HS256'],
-                key=_SECRET_KEY,
+                key=ConfigHelper.SECRET_KEY,
                 jwt=token
             )
 

@@ -1,12 +1,14 @@
 from bson import ObjectId
 from mongoengine import connect
 
+from helpers import ConfigHelper
+
 
 class DatabaseHelper:
 
     @staticmethod
     def connect():
-        connect('online-bookstore')
+        connect('online-bookstore',  host=ConfigHelper.MONGODB_HOST)
 
     @staticmethod
     def convert_to_object_id(string_id) -> ObjectId:

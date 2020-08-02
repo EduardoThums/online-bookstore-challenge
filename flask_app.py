@@ -1,7 +1,11 @@
+from pathlib import Path
+
+from dotenv import load_dotenv
 from flask import Flask, jsonify
 
 from errors.authentication_error import AuthenticationError
 from errors.business_error import BusinessError
+from helpers.config.config_helper import ConfigHelper
 from helpers.database.database_helper import DatabaseHelper
 from helpers.serializer.serializer_helper import SerializerHelper
 from routes import auth_middleware, book_middleware, user_middleware
@@ -11,6 +15,12 @@ app = Flask(__name__)
 app.register_blueprint(book_middleware)
 app.register_blueprint(user_middleware)
 app.register_blueprint(auth_middleware)
+
+
+current_directory = Path().absolute()
+load_dotenv(f'{current_directory}/.env')
+
+ConfigHelper.load_environment_variables()
 
 
 @app.before_first_request
