@@ -44,5 +44,15 @@ def handle_authentication_error(e):
     return handle_base_error(e, 403)
 
 
+@app.errorhandler(Exception)
+def handle_general_exceptions(e):
+    response = {
+        'code': 'INTERNAL_SERVER_ERROR',
+        'message': 'Something gone wrong internally'
+    }
+
+    return jsonify(response), 500
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
