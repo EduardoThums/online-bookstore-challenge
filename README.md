@@ -8,11 +8,15 @@ API RESTful criada como solução para o [desafio](https://github.com/bravosul/b
 - MongoDB
 - Docker
 
+---
+
 ## Requisitos
 - [Python](https://www.python.org/)
 - [PIP (Python package manager)](https://pypi.org/project/pip/)
 - [Virtualenv](https://packaging.python.org/key_projects/#virtualenv)
 - [Docker](https://docs.docker.com/desktop/) e [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
 
 ## Como usar
 1. Na raiz do projeto crie um arquivo chamado ```.env``` e adicione as variavies abaixo:
@@ -32,3 +36,7 @@ pip install -r requirements.txt
 ```
 make run-api
 ```
+---
+
+# Documentação
+Um examplo com todas as rotas está disponivel no formato json para o [Insomnia](https://insomnia.rest/) no diretório ```resources/```.
