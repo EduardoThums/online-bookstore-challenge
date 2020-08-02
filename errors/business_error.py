@@ -12,6 +12,7 @@ class BusinessError(BaseError):
     BOOK_BORROWING_NOT_FOUND = 'BOOK_BORROWING_NOT_FOUND'
     NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE = 'NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE'
     BOOK_DOESNT_BELONG_TO_USER = 'BOOK_DOESNT_BELONG_TO_USER'
+    BOOK_ALREADY_REGISTERED = 'BOOK_ALREADY_REGISTERED'
 
     def __init__(self, code: str):
         message = self._get_error_message_by_code(code)
@@ -30,7 +31,8 @@ class BusinessError(BaseError):
             'USER_ALREADY_REGISTERED': 'An user is already registered with this email',
             'BOOK_BORROWING_NOT_FOUND': 'The book it\'s borrowing doest no exist',
             'NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE': 'Its not allowed to return book with open fine',
-            'BOOK_DOESNT_BELONG_TO_USER': 'The book doesnt belongs to you'
+            'BOOK_DOESNT_BELONG_TO_USER': 'The book doesnt belongs to you',
+            'BOOK_ALREADY_REGISTERED': 'A book is already registered with this title'
         }
 
         return messages[code]

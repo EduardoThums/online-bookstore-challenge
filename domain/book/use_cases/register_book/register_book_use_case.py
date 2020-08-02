@@ -2,6 +2,7 @@ from flask import request
 
 from domain.base.use_cases.base_use_case import BaseUseCase
 from domain.book.entities.book_entity import Book
+from errors.business_error import BusinessError
 
 
 class RegisterBookUseCase(BaseUseCase):
@@ -15,6 +16,11 @@ class RegisterBookUseCase(BaseUseCase):
 
     def exec(self):
         logged_user = request.logged_user.user_id
+
+        book_with_same_title = Book.first(title=self.title)
+
+        if book_with_same_title is not None:
+            raise BusinessError(code=BusinessError.BOOK_ALREADY_REGISTERED)
 
         new_book = Book(
             title=self.title,
