@@ -11,6 +11,7 @@ class BusinessError(BaseError):
     USER_ALREADY_REGISTERED = 'USER_ALREADY_REGISTERED'
     BOOK_BORROWING_NOT_FOUND = 'BOOK_BORROWING_NOT_FOUND'
     NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE = 'NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE'
+    BOOK_DOESNT_BELONG_TO_USER = 'BOOK_DOESNT_BELONG_TO_USER'
 
     def __init__(self, code: str):
         message = self._get_error_message_by_code(code)
@@ -27,8 +28,9 @@ class BusinessError(BaseError):
             'INVALID_EMAIL_FORMAT': 'The email format is not valid',
             'INVALID_PASSWORD_FORMAT': 'The password format is not valid',
             'USER_ALREADY_REGISTERED': 'An user is already registered with this email',
-            'BOOK_BORROWING_NOT_FOUND': 'The book it\'s not borrowed to you',
-            'NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE': 'Its not allowed to return book with open fine'
+            'BOOK_BORROWING_NOT_FOUND': 'The book it\'s borrowing doest no exist',
+            'NOT_ALLOWED_TO_RETURN_BOOK_WITH_OPEN_FINE': 'Its not allowed to return book with open fine',
+            'BOOK_DOESNT_BELONG_TO_USER': 'The book doesnt belongs to you'
         }
 
         return messages[code]

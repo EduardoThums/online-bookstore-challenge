@@ -4,6 +4,7 @@ from domain.book.use_cases.borrow_book.borrow_book_use_case import BorrowBookUse
 from domain.book.use_cases.list_all_books.list_all_books_use_case import ListAllBooksUseCase
 from domain.book.use_cases.list_borrowed_books.list_borrowed_books_use_case import ListBorrowedBooksUseCase
 from domain.book.use_cases.register_book.register_book_use_case import RegisterBookUseCase
+from domain.book.use_cases.remove_book_fine.remove_book_fine_use_case import RemoveBookFineUseCase
 from domain.book_borrowing.use_cases.return_book.return_book_use_case import ReturnBookUseCase
 from helpers.serializer.serializer_helper import SerializerHelper
 from routes.middlewares.required_logged_user.required_logged_user_middleware import require_logged_user
@@ -67,3 +68,17 @@ def return_book(book_id: str):
 
     return jsonify(), 200
 
+
+@book_middleware.route('/books/<book_id>/fine', methods=['DELETE'])
+@require_logged_user
+def remove_book_fine(book_id: str):
+    request_json = request.get_json()
+
+    user_id = request_json['user_id']
+
+    RemoveBookFineUseCase(
+        book_id=book_id,
+        user_id=user_id
+    ).exec()
+
+    return jsonify(), 200

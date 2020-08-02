@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import request
 
 from domain.base.use_cases.base_use_case import BaseUseCase
@@ -10,14 +11,16 @@ from helpers.serializer.serializer_helper import Serializable
 
 class BorrowedBookDetail(Serializable):
 
-    def __init__(self, book: Book, total_fine: float):
+    def __init__(self, book: Book, total_fine: float, borrowed_to_user: ObjectId):
         self.book = book
         self.total_fine = total_fine
+        self.borrowed_to_user = borrowed_to_user
 
     def __serialize__(self):
         return {
             **self.book.__serialize__(),
-            'total_fine': self.total_fine
+            'total_fine': self.total_fine,
+            'borrowed_to_user': self.borrowed_to_user
         }
 
 
@@ -49,7 +52,8 @@ class ListBorrowedBooksUseCase(BaseUseCase):
 
             borrowed_book = BorrowedBookDetail(
                 book=book,
-                total_fine=use_case.total_fine
+                total_fine=use_case.total_fine,
+                borrowed_to_user=book_borrowing.user.id
             )
 
             borrowed_books.append(borrowed_book)
