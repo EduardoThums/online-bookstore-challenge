@@ -13,7 +13,7 @@ RESTful API developed as a solution for the [challenge](https://github.com/bravo
 - [Python](https://www.python.org/)
 - [PIP (Python package manager)](https://pypi.org/project/pip/)
 - [Virtualenv](https://packaging.python.org/key_projects/#virtualenv)
-- [Docker](https://docs.docker.com/desktop/) e [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker](https://docs.docker.com/desktop/) and [Docker Compose](https://docs.docker.com/compose/install/)
 
 
 ## How to use
@@ -36,4 +36,4 @@ make run-api
 ```
 
 ## Documentation
-An example of all available routes is located in the ```resources/``` directory as an Insomnia JSON file.
+An example of all available routes is located in the ```resources/``` directory as an [Insomnia](https://insomnia.rest/) JSON file.
